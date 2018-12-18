@@ -14,28 +14,32 @@ $liTags.forEach((li, i) => {
 })
 
 const $aTags = document.querySelectorAll('nav > ul > li > a')
+function animate(time) {
+  requestAnimationFrame(animate);
+  TWEEN.update(time);
+}
+// 浏览器给个动画的帧率
+requestAnimationFrame(animate);
+
 $aTags.forEach((a, i) => {
   $aTags[i].onclick = e => {
     e.preventDefault()
     const id = e.currentTarget.getAttribute('href')
     const elem = document.querySelector(id)
     let top = elem.offsetTop
-
-    let n = 25
-    let t = 50
     let currentTop = window.scrollY
     let targetTop = top
-    const S = targetTop - currentTop
-    const s = S / n
-    let i = 0
-    const idd = setInterval(() => {
-      if (i === n) {
-        clearInterval(idd)
-        return
-      }
-      i = i + 1
-      window.scrollTo(0, currentTop + s * i)
-    }, t)
+    let s = targetTop - currentTop
+    var t = Math.abs((s/100)*300)
+    var coords = { y: currentTop}; 
+    var tween = new TWEEN.Tween(coords)
+      .to({ y: targetTop }, t > 500 ? 500 : t)
+      .easing(TWEEN.Easing.Quadratic.InOut) 
+      .onUpdate(function() {
+        window.scrollTo(0, coords.y)
+      })
+      .start(); 
+
   }
 })
 

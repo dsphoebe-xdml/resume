@@ -12,26 +12,29 @@ $liTags.forEach(function (li, i) {
     };
 });
 var $aTags = document.querySelectorAll('nav > ul > li > a');
+function animate(time) {
+    requestAnimationFrame(animate);
+    TWEEN.update(time);
+}
+// 浏览器给个动画的帧率
+requestAnimationFrame(animate);
 $aTags.forEach(function (a, i) {
     $aTags[i].onclick = function (e) {
         e.preventDefault();
         var id = e.currentTarget.getAttribute('href');
         var elem = document.querySelector(id);
         var top = elem.offsetTop;
-        var n = 25;
-        var t = 50;
         var currentTop = window.scrollY;
         var targetTop = top;
-        var S = targetTop - currentTop;
-        var s = S / n;
-        var i = 0;
-        var idd = setInterval(function () {
-            if (i === n) {
-                clearInterval(idd);
-                return;
-            }
-            i = i + 1;
-            window.scrollTo(0, currentTop + s * i);
-        }, t);
+        var s = targetTop - currentTop;
+        var t = Math.abs((s / 100) * 300);
+        var coords = { y: currentTop };
+        var tween = new TWEEN.Tween(coords)
+            .to({ y: targetTop }, t > 500 ? 500 : t)
+            .easing(TWEEN.Easing.Quadratic.InOut)
+            .onUpdate(function () {
+            window.scrollTo(0, coords.y);
+        })
+            .start();
     };
 });
