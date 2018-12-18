@@ -8,7 +8,7 @@ h1, h2, dl, dd, p {
 }
 body {
   width: 60%;
-  margin: 100px auto;
+  margin: 0 auto;
   line-height: 2;
   color: #555;
 }
