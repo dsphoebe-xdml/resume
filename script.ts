@@ -19,6 +19,23 @@ $aTags.forEach((a, i) => {
     e.preventDefault()
     const id = e.currentTarget.getAttribute('href')
     const elem = document.querySelector(id)
-    window.scrollTo(0, elem.offsetTop)
+    let top = elem.offsetTop
+
+    let n = 25
+    let t = 50
+    let currentTop = window.scrollY
+    let targetTop = top
+    const S = targetTop - currentTop
+    const s = S / n
+    let i = 0
+    const idd = setInterval(() => {
+      if (i === n) {
+        clearInterval(idd)
+        return
+      }
+      i = i + 1
+      window.scrollTo(0, currentTop + s * i)
+    }, t)
   }
 })
+
