@@ -39,7 +39,20 @@ $aTags.forEach((a, i) => {
         window.scrollTo(0, coords.y)
       })
       .start(); 
-
   }
 })
+console.log(window.scrollY)
+window.onscroll = x => {
+  const specialTags = document.querySelectorAll('[wrap]')
+  let minIdx = 0
+  specialTags.forEach((st, i) => {
+    if (Math.abs(specialTags[i].offsetTop - window.scrollY) < Math.abs(specialTags[minIdx].offsetTop - window.scrollY)) {
+      minIdx = i
+    }
+  })
+  const id = specialTags[minIdx].id
+  let navTag = document.querySelector('a[href="#'+id+'"]')
+  document.querySelector('nav .active').classList.remove('active')
+  navTag && navTag.classList.add('active')
+}
 

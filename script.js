@@ -38,3 +38,17 @@ $aTags.forEach(function (a, i) {
             .start();
     };
 });
+console.log(window.scrollY);
+window.onscroll = function (x) {
+    var specialTags = document.querySelectorAll('[wrap]');
+    var minIdx = 0;
+    specialTags.forEach(function (st, i) {
+        if (Math.abs(specialTags[i].offsetTop - window.scrollY) < Math.abs(specialTags[minIdx].offsetTop - window.scrollY)) {
+            minIdx = i;
+        }
+    });
+    var id = specialTags[minIdx].id;
+    var navTag = document.querySelector('a[href="#' + id + '"]');
+    document.querySelector('nav .active').classList.remove('active');
+    navTag && navTag.classList.add('active');
+};
