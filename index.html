@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="./css/css.css">
   <title>RS of Phoebe</title>
+  <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.11.1/dist/av-min.js"></script>
 </head>
 <body>
   <div class="loading"></div>
@@ -42,7 +43,7 @@
         </li>
       </ul>
     </nav>
-    <main>
+    <main hidden>
       <div class="first-screen">
         <div class="intro" wrap>
           <img src="./images/avatar.png" alt="" class="avatar">
@@ -112,11 +113,22 @@
         <dd>...</dd>
       </dl>
     </main>
+    <div class="messages">
+      <div class="title">欢迎留言</div>
+      <form action="">
+        <input type="text" id="name" placeholder="小名">
+        <input type="text" id="content" placeholder="说点啥">
+        <button type="submit">提交</button>
+      </form>
+      <ul id="messages">
+      </ul>
+      </div>
     <aside>
       设计稿来源：<a href="https://graphicriver.net/item/resume-cv/20414020">https://graphicriver.net/item/resume-cv/20414020</a>
     </aside>
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/16.3.5/Tween.min.js"></script>
   <script src="script.js"></script>
+  <script src="message.js"></script>
 </body>
 </html>
