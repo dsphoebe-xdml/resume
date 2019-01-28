@@ -62,9 +62,13 @@
     saveMessage() {
       var messageName = document.querySelector('#name')
       var messageContent = document.querySelector('#content')
-      this.model.save(name, content).then((obj) => {
+
+      this.model.save(
+        messageName.value,
+        messageContent.value
+      ).then((obj) => {
         const { name, content } = obj.attributes
-        renderMessage(name, content)
+        this.renderMessage(name, content)
       }).then(() => {
         messageName.value = ''
         messageContent.value = ''
